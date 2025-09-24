@@ -19,8 +19,8 @@ public partial class NotePage : ContentPage
             _note = note;
             EntryTitle.Text = note.Title;
             EditorText.Text = note.Text;
-            DatePickerNote.Date = note.Date.Date;
-            TimePickerNote.Time = note.Date.TimeOfDay;
+            DatePickerNote.Date = note.NoteDate.Date;
+            TimePickerNote.Time = note.NoteDate.TimeOfDay;
         }
     }
 
@@ -28,13 +28,16 @@ public partial class NotePage : ContentPage
     {
         _note.Title = EntryTitle.Text;
         _note.Text = EditorText.Text;
-        _note.Date = DatePickerNote.Date + TimePickerNote.Time;
+        _note.NoteDate = DatePickerNote.Date + TimePickerNote.Time;
 
         if (!MainPage.Notes.Contains(_note))
         {
             MainPage.Notes.Add(_note);
         }
 
+        await App.Database.SaveNoteAsync(_note);
+
+        await DisplayAlert("Успех", "Заметка сохранена!", "OK");
         await Navigation.PopAsync();
     }
 

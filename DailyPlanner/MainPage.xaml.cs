@@ -51,10 +51,9 @@ public partial class MainPage : ContentPage
         }
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
-        NotesCollection.ItemsSource = null;
-        NotesCollection.ItemsSource = Notes;
+        NotesCollection.ItemsSource = await App.Database.GetNotesAsync(); // async/await
     }
 }

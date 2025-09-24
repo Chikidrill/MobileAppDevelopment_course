@@ -1,14 +1,33 @@
-﻿namespace DailyPlanner
+﻿using DailyPlanner.Data;
+
+namespace DailyPlanner
 {
     public partial class App : Application
     {
-        public App()
+        private static DailyPlannerDB database;
+        public static DailyPlannerDB Database
         {
-            InitializeComponent();
+            get
+            {
+                if (database == null)
+                {
+                    var dbPath = Path.Combine(
+                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                        "dailyplanner.db3");
 
-            MainPage = new AppShell();
+                    database = new DailyPlannerDB(dbPath); // ← падает тут
+                }
+                return database;
+            }
         }
 
-
+        public App()
+        {
+            SQLitePCL.Batteries_V2.Init();
+            InitializeComponent();
+            MainPage = new AppShell();
+        }
     }
+
+
 }
