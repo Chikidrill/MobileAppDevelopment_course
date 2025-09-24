@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyPlanner.NotePage">
+    
+    <Shell.TitleView>
+        <HorizontalStackLayout Padding="25,20,0,0">
+            <Label Text="Новая заметка"
+               FontSize="25"
+               FontFamily="Nekst" 
+               FontAttributes="Bold"
+               TextColor="White"
+               VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+    </Shell.TitleView>
+    
+    <VerticalStackLayout Padding="25" Spacing="20">
+        <Entry x:Name="EntryTitle" Placeholder="Название"/>
+        <Editor x:Name="EditorText" Placeholder="Текст заметки" HeightRequest="150"/>
+        <DatePicker x:Name="DatePickerNote"/>
+        <TimePicker x:Name="TimePickerNote"/>
+
+        <HorizontalStackLayout Spacing="10">
+            <Button 
+                Text="Отмена" 
+                TextColor="White"
+                BackgroundColor="#512BD4"
+                Clicked="OnCancelClicked"/>
+            <Button 
+                Text="Сохранить" 
+                TextColor="White"
+                BackgroundColor="#512BD4"
+                Clicked="OnSaveClicked"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

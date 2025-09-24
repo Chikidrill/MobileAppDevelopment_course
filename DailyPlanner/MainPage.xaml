@@ -1,0 +1,84 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyPlanner.MainPage"
+             Title="Ежедневник">
+    <Shell.TitleView>
+        <HorizontalStackLayout Padding="10,20,0,0">
+            <Label Text="Ежедневник"
+                   FontSize="25"
+                   FontFamily="Nekst" 
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+    </Shell.TitleView>
+    
+    <VerticalStackLayout Padding="25">
+        <SearchBar x:Name="SearchBarNotes"
+                   Placeholder="Поиск..."
+                   TextChanged="OnSearchTextChanged"
+                   BackgroundColor="LightGray"/>
+        <Button 
+             Text="Добавить заметку" 
+             FontFamily="Nekst"
+             TextColor="White"
+             BackgroundColor="#512BD4"
+             Clicked="OnAddNoteClicked" 
+             WidthRequest="120"
+             HorizontalOptions="Start"
+             Margin="0,20,0,0"/>
+        <CollectionView x:Name="NotesCollection"
+                SelectionMode="Single"
+                Margin="0,20,0,0">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="20"
+                           BorderColor="Gray"
+                           BackgroundColor="Transparent"
+                           CornerRadius="8">
+                        <VerticalStackLayout>
+                            <Label 
+                            Text="{Binding Title}"
+                            FontSize="18" 
+                            FontFamily="Nekst"
+                            FontAttributes="Bold"/>
+                            <Label 
+                            Text="{Binding Text}" 
+                            LineBreakMode="TailTruncation"
+                            FontFamily="Nekst"/>
+                            <Label 
+                            Text="{Binding Date, StringFormat='{0:dd.MM.yyyy HH:mm}'}"
+                            FontSize="12" 
+                            TextColor="White"
+                            FontFamily="Nekst"/>
+
+                            <HorizontalStackLayout Padding="0,10,0,10" Spacing="20">
+                                <Button Text="Редактировать"
+                                    FontFamily="Nekst"
+                                    TextColor="White"
+                                    BackgroundColor="#512BD4"
+                                    Clicked="OnEditNoteClicked"         
+                                    HorizontalOptions="Start"
+                                    CommandParameter="{Binding .}" />
+                                <Button Text="Удалить"
+                                    FontFamily="Nekst"
+                                    TextColor="White"
+                                    BackgroundColor="#512BD4"
+                                    Clicked="OnDeleteNoteClicked"
+                                    HorizontalOptions="Start"
+                                    CommandParameter="{Binding .}" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+       
+    </VerticalStackLayout>
+</ContentPage>
