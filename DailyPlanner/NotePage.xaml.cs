@@ -22,6 +22,7 @@ public partial class NotePage : ContentPage
             DatePickerNote.Date = note.NoteDate.Date;
             TimePickerNote.Time = note.NoteDate.TimeOfDay;
         }
+        BindingContext = _note;
     }
 
     private async void OnSaveClicked(object sender, EventArgs e)

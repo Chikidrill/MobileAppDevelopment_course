@@ -32,21 +32,19 @@ public partial class MainPage : ContentPage
 
         NotesCollection.ItemsSource = filtered;
     }
+    private async Task ReloadNotesAsync()
+    {
+        NotesCollection.ItemsSource = await App.Database.GetNotesAsync();
+    }
+
     private async void OnDeleteNoteClicked(object sender, EventArgs e)
     {
         if (sender is Button btn && btn.CommandParameter is Note note)
         {
-            bool confirm = await DisplayAlert(
-                "Удаление",
-                $"Вы уверены, что хотите удалить заметку \"{note.Title}\"?",
-                "Да",
-                "Отмена");
-
-            if (confirm)
+            if (await DisplayAlert("Удаление", $"Удалить \"{note.Title}\"?", "Да", "Нет"))
             {
-                MainPage.Notes.Remove(note);
-                NotesCollection.ItemsSource = null;
-                NotesCollection.ItemsSource = MainPage.Notes;
+                await App.Database.DeleteNoteAsync(note);
+                await ReloadNotesAsync();
             }
         }
     }
