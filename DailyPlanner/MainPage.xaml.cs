@@ -1,4 +1,7 @@
-﻿namespace DailyPlanner;
+﻿using CommunityToolkit.Maui.Extensions;
+using CommunityToolkit.Maui.Views;
+
+namespace DailyPlanner;
 
 public partial class MainPage : ContentPage
 {
@@ -48,10 +51,15 @@ public partial class MainPage : ContentPage
             }
         }
     }
+    private async void OnSettingsClicked(object sender, EventArgs e)
+    {
+        var popup = new SettingsPopup();
+        await this.ShowPopupAsync(popup);
+    }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        NotesCollection.ItemsSource = await App.Database.GetNotesAsync(); // async/await
+        NotesCollection.ItemsSource = await App.Database.GetNotesAsync(); 
     }
 }

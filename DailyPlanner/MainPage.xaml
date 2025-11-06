@@ -2,17 +2,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DailyPlanner.MainPage"
              Title="Ежедневник">
+
     <Shell.TitleView>
-        <HorizontalStackLayout Padding="10,20,0,0">
-            <Label Text="Ежедневник"
-                   FontSize="25"
-                   FontFamily="Nekst" 
-                   FontAttributes="Bold"
-                   TextColor="Black"
-                   VerticalOptions="Center"/>
-        </HorizontalStackLayout>
+        <Grid Padding="10,20,25,0" ColumnDefinitions="*,Auto">
+            <Label 
+                Text="Ежедневник" 
+                FontFamily="{DynamicResource AppFontFamily}"
+               FontSize="{DynamicResource AppFontSize}"
+               TextColor="{DynamicResource AppTextColor}"
+                FontAttributes="Bold" 
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" Grid.Column="0"/>
+            <ImageButton 
+                Source="settings.png" 
+                WidthRequest="30" 
+                HeightRequest="30" 
+                BackgroundColor="Transparent" 
+                VerticalOptions="Center" 
+                HorizontalOptions="End" 
+                Grid.Column="1"
+                Clicked="OnSettingsClicked"/>
+        </Grid>
     </Shell.TitleView>
-    
+
     <VerticalStackLayout Padding="25">
         <SearchBar x:Name="SearchBarNotes"
                    Placeholder="Поиск..."
@@ -79,6 +91,6 @@
         </CollectionView>
 
 
-       
+
     </VerticalStackLayout>
 </ContentPage>

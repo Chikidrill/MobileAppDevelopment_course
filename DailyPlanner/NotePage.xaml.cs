@@ -11,8 +11,11 @@ public partial class NotePage : ContentPage
         if (note == null)
         {
             _note = new Note();
-            DatePickerNote.Date = DateTime.Now.Date;
-            TimePickerNote.Time = DateTime.Now.TimeOfDay;
+
+            var defaultDate = Preferences.Get("SelectedDate", DateTime.Now);
+            DatePickerNote.Date = defaultDate.Date;
+            TimePickerNote.Time = defaultDate.TimeOfDay;
+
         }
         else
         {
@@ -22,6 +25,7 @@ public partial class NotePage : ContentPage
             DatePickerNote.Date = note.NoteDate.Date;
             TimePickerNote.Time = note.NoteDate.TimeOfDay;
         }
+
         BindingContext = _note;
     }
 

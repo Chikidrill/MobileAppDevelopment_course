@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               xmlns:sys="clr-namespace:System;assembly=netstandard"
+               x:Class="DailyPlanner.SettingsPopup">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+        <Label Text="Настройки"
+               FontFamily="{DynamicResource AppFontFamily}"
+               FontSize="{DynamicResource AppFontSize}"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+
+        <DatePicker x:Name="DatePickerControl" />
+
+        <Picker x:Name="ThemePicker" Title="Цветовая тема">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Светлая</x:String>
+                    <x:String>Тёмная</x:String>
+                    <x:String>Фиолетовая</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Picker x:Name="FontPicker" Title="Шрифт">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>OpenSansRegular</x:String>
+                    <x:String>OpenSansSemibold</x:String>
+                    <x:String>Nekst</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+
+        <Slider x:Name="FontSizeSlider"
+                Minimum="12"
+                Maximum="30"
+                Value="18" />
+        <Label Text="{Binding Source={x:Reference FontSizeSlider}, Path=Value, StringFormat='Размер шрифта: {0:F0}'}"
+               HorizontalOptions="Center" />
+
+        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+            <Button Text="Сбросить"
+                    BackgroundColor="Gray"
+                    Clicked="OnResetClicked" />
+            <Button Text="Сохранить"
+                    BackgroundColor="#512BD4"
+                    TextColor="White"
+                    Clicked="OnSaveClicked" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</toolkit:Popup>
