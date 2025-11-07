@@ -5,8 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:DailyPlanner"
     Shell.FlyoutBehavior="Disabled"
+    TitleColor="{DynamicResource AppTextColor}"
+    Shell.BackgroundColor="{DynamicResource AppBackgroundColor}"
     Title="DailyPlanner">
-    
+
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"

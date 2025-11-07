@@ -1,96 +1,113 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DailyPlanner.MainPage"
-             Title="Ежедневник">
+             BackgroundColor="{DynamicResource AppBackgroundColor}">
 
-    <Shell.TitleView>
-        <Grid Padding="10,20,25,0" ColumnDefinitions="*,Auto">
+    <Grid RowDefinitions="Auto,*"
+          BackgroundColor="{DynamicResource AppBackgroundColor}">
+
+        <!-- ШАПКА -->
+        <Grid BackgroundColor="{DynamicResource AppBackgroundColor}"
+              HeightRequest="80"
+              Padding="15,20"
+              ColumnDefinitions="*,Auto">
             <Label 
-                Text="Ежедневник" 
+                Text="Ежедневник"
                 FontFamily="{DynamicResource AppFontFamily}"
-               FontSize="{DynamicResource AppFontSize}"
-               TextColor="{DynamicResource AppTextColor}"
-                FontAttributes="Bold" 
-                VerticalOptions="Center" 
-                HorizontalOptions="Start" Grid.Column="0"/>
+                FontSize="{DynamicResource AppFontSize}"
+                TextColor="{DynamicResource AppTextColor}"
+                FontAttributes="Bold"
+                VerticalOptions="Center" />
+
             <ImageButton 
-                Source="settings.png" 
-                WidthRequest="30" 
-                HeightRequest="30" 
-                BackgroundColor="Transparent" 
-                VerticalOptions="Center" 
-                HorizontalOptions="End" 
-                Grid.Column="1"
-                Clicked="OnSettingsClicked"/>
+                Source="setting1.svg" 
+                WidthRequest="30"
+                HeightRequest="30"
+                MinimumWidthRequest="0" 
+                MinimumHeightRequest="0"
+                BackgroundColor="White"
+                VerticalOptions="Center"
+                HorizontalOptions="End"
+                Clicked="OnSettingsClicked"
+                Grid.Column="1"/>
         </Grid>
-    </Shell.TitleView>
 
-    <VerticalStackLayout Padding="25">
-        <SearchBar x:Name="SearchBarNotes"
-                   Placeholder="Поиск..."
-                   TextChanged="OnSearchTextChanged"
-                   BackgroundColor="LightGray"/>
-        <Button 
-             Text="Добавить заметку" 
-             FontFamily="Nekst"
-             TextColor="White"
-             BackgroundColor="#512BD4"
-             Clicked="OnAddNoteClicked" 
-             WidthRequest="120"
-             HorizontalOptions="Start"
-             Margin="0,20,0,0"/>
-        <CollectionView x:Name="NotesCollection"
-                SelectionMode="Single"
-                Margin="0,20,0,0">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-            </CollectionView.ItemsLayout>
+        <!-- ОСНОВНОЙ КОНТЕНТ -->
+        <ScrollView Grid.Row="1" Padding="25">
+            <VerticalStackLayout Spacing="20">
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="20"
-                           BorderColor="Gray"
-                           BackgroundColor="Transparent"
-                           CornerRadius="8">
-                        <VerticalStackLayout>
-                            <Label 
-                            Text="{Binding Title}"
-                            FontSize="18" 
-                            FontFamily="Nekst"
-                            FontAttributes="Bold"/>
-                            <Label 
-                            Text="{Binding Text}" 
-                            LineBreakMode="TailTruncation"
-                            FontFamily="Nekst"/>
-                            <Label 
-                            Text="{Binding NoteDate, StringFormat='{0:dd.MM.yyyy HH:mm}'}"
-                            FontSize="12" 
-                            TextColor="Black"
-                            FontFamily="Nekst"/>
+                <SearchBar x:Name="SearchBarNotes"
+                           Placeholder="Поиск..."
+                           TextChanged="OnSearchTextChanged"
+                           BackgroundColor="LightGray"/>
 
-                            <HorizontalStackLayout Padding="0,10,0,10" Spacing="20">
-                                <Button Text="Редактировать"
-                                    FontFamily="Nekst"
-                                    TextColor="White"
-                                    BackgroundColor="#512BD4"
-                                    Clicked="OnEditNoteClicked"         
-                                    HorizontalOptions="Start"
-                                    CommandParameter="{Binding .}" />
-                                <Button Text="Удалить"
-                                    FontFamily="Nekst"
-                                    TextColor="White"
-                                    BackgroundColor="#512BD4"
-                                    Clicked="OnDeleteNoteClicked"
-                                    HorizontalOptions="Start"
-                                    CommandParameter="{Binding .}" />
-                            </HorizontalStackLayout>
-                        </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                <Button 
+                    Text="Добавить заметку"
+                    FontFamily="Nekst"
+                    TextColor="White"
+                    BackgroundColor="#512BD4"
+                    BorderColor="{DynamicResource AppTextColor}"
+                    BorderWidth="1"
+                    Clicked="OnAddNoteClicked"
+                    WidthRequest="140"
+                    HorizontalOptions="Start"/>
 
+                <CollectionView x:Name="NotesCollection"
+                                SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
 
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="20"
+                                   BorderColor="{DynamicResource AppTextColor}"
+                                   BackgroundColor="Transparent"
+                                   CornerRadius="8">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Title}"
+                                           FontFamily="{DynamicResource AppFontFamily}"
+                                           FontSize="{DynamicResource AppFontSize}"
+                                           TextColor="{DynamicResource AppTextColor}"
+                                           FontAttributes="Bold"/>
 
-    </VerticalStackLayout>
+                                    <Label Text="{Binding Text}"
+                                           FontFamily="{DynamicResource AppFontFamily}"
+                                           FontSize="{DynamicResource AppFontSize}"
+                                           TextColor="{DynamicResource AppTextColor}"
+                                           LineBreakMode="TailTruncation"/>
+
+                                    <Label Text="{Binding NoteDate, StringFormat='{0:dd.MM.yyyy HH:mm}'}"
+                                           FontFamily="{DynamicResource AppFontFamily}"
+                                           FontSize="{DynamicResource AppFontSize}"
+                                           TextColor="{DynamicResource AppTextColor}"/>
+
+                                    <HorizontalStackLayout Spacing="20" Padding="0,10,0,0">
+                                        <Button Text="Редактировать"
+                                                FontFamily="Nekst"
+                                                TextColor="White"
+                                                BackgroundColor="#512BD4"
+                                                BorderColor="{DynamicResource AppTextColor}"
+                                                BorderWidth="1"
+                                                Clicked="OnEditNoteClicked"
+                                                CommandParameter="{Binding .}" />
+                                        <Button Text="Удалить"
+                                                FontFamily="Nekst"
+                                                TextColor="White"
+                                                BackgroundColor="#512BD4"
+                                                BorderColor="{DynamicResource AppTextColor}"
+                                                BorderWidth="1"
+                                                Clicked="OnDeleteNoteClicked"
+                                                CommandParameter="{Binding .}" />
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
 </ContentPage>

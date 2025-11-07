@@ -8,26 +8,17 @@ public partial class SettingsPopup : Popup
     public SettingsPopup()
     {
         InitializeComponent();
-
-        // Загружаем сохранённые значения
         LoadSettings();
     }
 
     private void LoadSettings()
     {
-        // Дата (по умолчанию — сегодня)
         var savedDate = Preferences.Get("SelectedDate", DateTime.Now);
         DatePickerControl.Date = savedDate;
-
-        // Тема
         var theme = Preferences.Get("Theme", "Светлая");
         ThemePicker.SelectedItem = theme;
-
-        // Шрифт
         var font = Preferences.Get("Font", "OpenSansRegular");
         FontPicker.SelectedItem = font;
-
-        // Размер
         var size = Preferences.Get("FontSize", 18.0);
         FontSizeSlider.Value = size;
     }
@@ -81,5 +72,6 @@ public partial class SettingsPopup : Popup
         FontSizeSlider.Value = 18;
 
         ApplyStyle(); // возвращаем стандартное оформление
+
     }
 }

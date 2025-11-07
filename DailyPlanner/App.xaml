@@ -10,15 +10,13 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <!-- 🔧 Динамические ресурсы для пользовательских настроек -->
+            <!-- 🔧 Динамические ресурсы -->
             <Color x:Key="AppBackgroundColor">White</Color>
             <Color x:Key="AppTextColor">Black</Color>
-
             <x:Double x:Key="AppFontSize">18</x:Double>
             <x:String x:Key="AppFontFamily">OpenSansRegular</x:String>
         </ResourceDictionary>
-
-
     </Application.Resources>
-    
+
+
 </Application>
